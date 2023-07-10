@@ -2,9 +2,12 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 import Home from "../components/HelloWorld.vue";
 import A from "../components/animationA.vue";
+import B from "../components/animationB.vue";
 
-const routes = [{ path: "/", component: Home },
-{ path: "/a", component: A }
+const routes = [
+  { path: "/", component: Home },
+  { path: "/a", component: A },
+  { path: "/b", component: B },
 ];
 
 const router = createRouter({
