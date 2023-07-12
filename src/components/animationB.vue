@@ -1,11 +1,14 @@
 <template>
   <div>
     <my-vue-element></my-vue-element>
+    <c msg="helllo"></c>
   </div>
 </template>
 
 <script setup>
 import { defineCustomElement } from "vue";
+
+import C from './C.vue'
 
 const MyVueElement = defineCustomElement({
   // 这里是同平常一样的 Vue 组件选项
