@@ -1,24 +1,21 @@
 <script>
-import { ref, h } from "vue";
 
+import {h} from 'vue';
 export default {
-  props: {},
-  setup(props) {
-    let p = h("p", "1111");
-    const count = ref(1);
-    const ok = ref("ok");
-    return () =>
-      h(
-        "div",
-        { style: { "background-color": "#2f2" }, id: "menu" },
-        Array.from({ length: 2 }).map(() => {
-          return h("p", "hahaha");
-        }),
-        [ok.value ? h("div", "yes") : h("span", "no")],
-        [h('button',{onClick(event){
-           console.log(event)
-        }},'click Me')]
-      );
-  },
-};
+  props: ['msg'],
+  setup(props, { slots }) {
+    return () => [
+      // 默认插槽：
+      // <div><slot /></div>
+      h('div', slots.default()),
+
+      // 具名插槽：
+      // <div><slot name="footer" :text="message" /></div>
+      h('div',slots.footer({
+        text:props.msg
+      }))
+     
+    ]
+  }
+}
 </script>

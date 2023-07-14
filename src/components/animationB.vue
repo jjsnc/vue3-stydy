@@ -1,14 +1,21 @@
 <template>
   <div>
     <my-vue-element></my-vue-element>
-    <c msg="helllo"></c>
+    <c msg="helllo"
+      >我是渲染插槽
+      <template v-slot:footer>
+      <!-- 插入到 "footer" 插槽 -->
+      <p>这是底部内容</p>
+    </template>
+
+    </c>
   </div>
 </template>
 
 <script setup>
 import { defineCustomElement } from "vue";
 
-import C from './C.vue'
+import C from "./C.vue";
 
 const MyVueElement = defineCustomElement({
   // 这里是同平常一样的 Vue 组件选项
@@ -17,9 +24,11 @@ const MyVueElement = defineCustomElement({
   template: `<div class='test'>123456</div>`,
 
   // defineCustomElement 特有的：注入进 shadow root 的 CSS
-  styles: [`.test{
+  styles: [
+    `.test{
     color:#2196F3
-  }`],
+  }`,
+  ],
 });
 
 // 注册自定义元素
