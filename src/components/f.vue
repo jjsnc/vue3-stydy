@@ -18,12 +18,18 @@ const showModal = ref(false)
       <template #body>
         <h3>custom body 内容</h3>
       </template>
+      <template #footer>
+        <h3>custom body 内容</h3>
+      </template>
     </modal>
   </Teleport>
 </template>
 
 <style lang="scss">
 .modal-body{ 
+    color: #000;
+}
+.modal-footer{ 
     color: #000;
 }
 </style>
