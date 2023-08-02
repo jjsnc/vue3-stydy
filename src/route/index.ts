@@ -7,6 +7,7 @@ import C from "../components/C.vue";
 import D from "../components/d.vue";
 import E from "../components/e.vue";
 import F from "../components/f.vue";
+import G from "../components/g.vue";
 
 const routes = [
   { path: "/", component: Home },
@@ -15,6 +16,7 @@ const routes = [
   { path: "/d", component: D },
   { path: "/e", component: E },
   { path: "/f", component: F },
+  { path: "/g", component: G },
 ];
 
 const router = createRouter({
