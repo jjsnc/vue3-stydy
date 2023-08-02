@@ -49,6 +49,7 @@ function remove(item) {
 .container {
   position: relative;
   padding: 0;
+  color: #000;
 }
 
 .item {
