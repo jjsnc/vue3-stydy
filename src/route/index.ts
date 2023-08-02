@@ -5,12 +5,16 @@ import A from "../components/animationA.vue";
 import B from "../components/animationB.vue";
 import C from "../components/C.vue";
 import D from "../components/d.vue";
+import E from "../components/e.vue";
+import F from "../components/f.vue";
 
 const routes = [
   { path: "/", component: Home },
   { path: "/a", component: A },
   { path: "/b", component: B },
   { path: "/d", component: D },
+  { path: "/e", component: E },
+  { path: "/f", component: F },
 ];
 
 const router = createRouter({

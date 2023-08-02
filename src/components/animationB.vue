@@ -14,7 +14,9 @@
 
 <script setup>
 import { defineCustomElement } from "vue";
-
+defineOptions({
+  name:'bComponent'
+})
 import C from "./C.vue";
 
 const MyVueElement = defineCustomElement({

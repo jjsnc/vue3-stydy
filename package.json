@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "dynamics": "^1.0.0",
+    "sass": "^1.64.2",
+    "scss": "^0.2.4",
     "vue": "^3.2.47",
     "vue-router": "4"
   },

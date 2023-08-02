@@ -17,4 +17,7 @@ export default {
       vue: "vue/dist/vue.esm-bundler.js",
     },
   },
+  define:{
+    '__VUE_OPTIONS_API__':false
+  }
 };
