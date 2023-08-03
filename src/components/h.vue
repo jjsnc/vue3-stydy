@@ -1,72 +1,112 @@
-<template>
-  <div>
-    <button @click="show = !show">Toggle</button>
-    <button @click="fadeFlag = !fadeFlag">ToggleFade</button>
-    <Transition>
-      <p v-if="show">hello</p>
-    </Transition>
-    <Transition name="slide-fade">
-      <p v-if="fadeFlag">hello</p>
-    </Transition>
-    <Transition name="bounce">
-      <p v-if="show" style="text-align: center">
-        Hello here is some bouncy text!
-      </p>
-    </Transition>
-  </div>
-</template>
-
-<script lang="ts" setup>
+<script setup>
 import { ref } from "vue";
-let show = ref(false);
-let fadeFlag = ref(false);
+import gsap from 'gsap'
+const show = ref(true);
+function onBeforeEnter(el) {
+  gsap.set(el, {
+    scaleX: 0.25,
+    scaleY: 0.25,
+    opacity: 1,
+  });
+}
+
+function onEnter(el, done) {
+  gsap.to(el, {
+    duration: 1,
+    scaleX: 1,
+    scaleY: 1,
+    opacity: 1,
+    ease: "elastic.inOut(2.5, 1)",
+    onComplete: done,
+  });
+}
+
+function onLeave(el, done) {
+  gsap.to(el, {
+    duration: 0.7,
+    scaleX: 1,
+    scaleY: 1,
+    x: 300,
+    ease: "elastic.inOut(2.5, 1)",
+  });
+  gsap.to(el, {
+    duration: 0.2,
+    delay: 0.5,
+    opacity: 0,
+    onComplete: done,
+  });
+}
 </script>
 
-<style lang="scss">
-/* 下面我们会解释这些 class 是做什么的 */
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.8s ease;
+<template>
+  <button @click="show = !show">Toggle</button>
+  <Transition
+    @before-enter="onBeforeEnter"
+    @enter="onEnter"
+    @leave="onLeave"
+    :css="false"
+  >
+    <div class="gsap-box" v-if="show"></div>
+  </Transition>
+  <Transition duration="550" name="nested">
+    <div v-if="show" class="outer">
+      <div class="inner">Hello</div>
+    </div>
+  </Transition>
+</template>
+
+<style>
+.gsap-box {
+  background: #42b883;
+  margin-top: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.outer,
+.inner {
+  background: #eee;
+  padding: 30px;
+  min-height: 100px;
 }
 
-.v-enter-from,
-.v-leave-to {
+.inner {
+  background: #ccc;
+}
+
+.nested-enter-active,
+.nested-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+/* delay leave of parent element */
+.nested-leave-active {
+  transition-delay: 0.25s;
+}
+
+.nested-enter-from,
+.nested-leave-to {
+  transform: translateY(30px);
   opacity: 0;
 }
 
-/*
-  进入和离开动画可以使用不同
-  持续时间和速度曲线。
-*/
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
+/* we can also transition nested elements using nested selectors */
+.nested-enter-active .inner,
+.nested-leave-active .inner {
+  transition: all 0.3s ease-in-out;
+}
+/* delay enter of nested element */
+.nested-enter-active .inner {
+  transition-delay: 0.25s;
 }
 
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-
-.bounce-enter-active {
-  animation: bounce-in 0.5s;
-}
-.bounce-leave-active {
-  animation: bounce-in 0.5s reverse;
-}
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.25);
-  }
-  100% {
-    transform: scale(1);
-  }
+.nested-enter-from .inner,
+.nested-leave-to .inner {
+  transform: translateX(30px);
+  /*
+  	Hack around a Chrome 96 bug in handling nested opacity transitions.
+    This is not needed in other browsers or Chrome 99+ where the bug
+    has been fixed.
+  */
+  opacity: 0.001;
 }
 </style>
