@@ -9,5 +9,6 @@ export default {
           if (o) return o[i]
         }, options)        
       }
+      app.provide('i18n', options)
     }
   }
