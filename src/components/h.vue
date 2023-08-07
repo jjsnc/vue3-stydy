@@ -100,7 +100,7 @@ function onLeave(el, done) {
 }
 
 .nested-enter-from .inner,
-.nested-leave-to .inner {
+.nested-leave-to .inner { 
   transform: translateX(30px);
   /*
   	Hack around a Chrome 96 bug in handling nested opacity transitions.
