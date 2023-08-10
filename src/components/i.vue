@@ -2,7 +2,10 @@
   <div>
     
     <h1>{{ $translate("greetings.hello") }}</h1>
-    <j v-model:title="testValue" v-model:lastName="name" ></j>  {{testValue}} {{name}}
+    <j v-model:title.capitalize="testValue" v-model:lastName="name" ></j>  {{testValue}} {{name}} 
+
+
+    
    </div>
 </template>
 
@@ -14,7 +17,8 @@ import { inject,ref } from "vue";
 const i18n = inject("i18n");
 
 let  testValue = ref('test');
-let  name = ref('lastName');
+let  name = ref('asf');
 
+let age =ref('18')
 console.log(i18n.greetings.hello);
 </script>

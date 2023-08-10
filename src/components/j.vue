@@ -3,18 +3,21 @@
 import {computed} from 'vue';
 
 
-const props = defineProps(['title','lastName'])
+const props = defineProps(['title','lastName','titleModifiers'])
 const emit = defineEmits(['update:title','update:lastName'])
-const value = computed({
-  get() {
-    return props.title
-  },
-  set(value) {
-    emit('update:title', value)
-  }
-})
 
-const lastName = computed({
+console.log(props.titleModifiers)
+function emitValue(e) {
+  let value = e.target.value
+  if (props.titleModifiers.capitalize) {
+    value = value.charAt(0).toUpperCase() + value.slice(1)
+  }
+  emit('update:title', value)
+}
+
+
+
+const myName = computed({
   get() {
     return props.lastName
   },
@@ -27,10 +30,7 @@ const lastName = computed({
 </script>
 
 <template>
-  <input v-model="value" />
+  <input type="text" :value="title" @input="emitValue" />
 
-  <input
-    type="text"
-    v-model="lastName"
-  />
+
 </template>
