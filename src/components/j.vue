@@ -6,7 +6,6 @@ import {computed} from 'vue';
 const props = defineProps(['title','lastName','titleModifiers'])
 const emit = defineEmits(['update:title','update:lastName'])
 
-console.log(props.titleModifiers)
 function emitValue(e) {
   let value = e.target.value
   if (props.titleModifiers.capitalize) {
