@@ -11,8 +11,9 @@
 
 <script setup>
 import J from "./j.vue";
-import { ref, onMounted, inject } from "vue";
-
+import { ref, onMounted, inject,watch } from "vue";
+const x = ref(0)
+const y = ref(0)
 const list = ref([1, 2, 3]);
 
 const itemRefs = ref([]);
@@ -28,7 +29,15 @@ console.log(i18n.greetings.hello);
 function handleSubmit(email, password) {
   console.log(email, password);
 }
-
+watch(
+  () => x.value + y.value,
+  (sum) => {
+    console.log(`sum of x + y is: ${sum}`)
+  }
+)
+setTimeout(() => {
+    x.value = 3
+}, 2000);
 onMounted(() => {
   console.log(itemRefs.value[0])
   alert(itemRefs.value.map((i) => i.textContent));
