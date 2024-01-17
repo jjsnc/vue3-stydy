@@ -4,12 +4,12 @@ import vue from "@vitejs/plugin-vue";
 export default {
   plugins: [
     vue({
-      // template: {
-      //   compilerOptions: {
-      //     // 将所有带短横线的标签名都视为自定义元素
-      //     isCustomElement: (tag) => tag.includes("-"),
-      //   },
-      // },
+      template: {
+        compilerOptions: {
+          // 将所有带短横线的标签名都视为自定义元素
+          isCustomElement: (tag) => tag.includes("-"),
+        },
+      },
     }),
   ],
   resolve: {
