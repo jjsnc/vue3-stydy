@@ -12,6 +12,7 @@ import H from "../components/h.vue";
 import I from "../components/i.vue";
 import WatchPage from "../views/watch/index.vue";
 import WatchEffectPage from "../views/watchEffect/index.vue";
+import directivesPage from "../views/directives/index.vue";
 
 const routes = [
   { path: "/", component: Home },
@@ -25,6 +26,7 @@ const routes = [
   { path: "/i", component: I },
   { path: "/watch", component: WatchPage },
   { path: "/watchEffect", component: WatchEffectPage },
+  { path: "/directives", component: directivesPage },
 ];
 
 const router = createRouter({
