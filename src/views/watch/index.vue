@@ -48,4 +48,20 @@ watch(
     console.log(newValue1, newValue2, prevValue1, prevValue2);
   }
 );
+
+//   当使用 getter 函数作为源时 需要手动开启深层监听
+
+watch(
+  () => state,
+  (newValue, oldValue) => {
+    console.log(newValue, oldValue, 333);
+  },
+  { deep: true }
+);
+
+// 当直接侦听一个响应式对象时，侦听器会自动启用深层模式
+
+watch(state, (value) => {
+  console.log(value, 666);
+});
 </script>
