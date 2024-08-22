@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, computed } from "vue";
-
-import dynamics from "./dy.js";
+// @ts-ignore
+import dynamics from "dynamics.js";
 
 let isDragging = false;
 const headerHeight = 120;
@@ -19,32 +19,35 @@ const contentPosition = computed(() => {
   };
 });
 
+function startDrag(e: MouseEvent | TouchEvent) {
+  // 检查是否为触摸事件
+  const event = e instanceof TouchEvent ? e.changedTouches[0] : e;
 
-function startDrag(e) {
-  e = e.changedTouches ? e.changedTouches[0] : e
-  isDragging = true
-  start.x = e.pageX
-  start.y = e.pageY
+  isDragging = true;
+  start.x = event.pageX;
+  start.y = event.pageY;
 }
 
-function onDrag(e) {
-  e = e.changedTouches ? e.changedTouches[0] : e
+function onDrag(e: MouseEvent | TouchEvent) {
+  // 将 `e` 转换为 `MouseEvent` 或 `Touch` 对象
+  const event: MouseEvent | Touch =
+    e instanceof TouchEvent ? e.changedTouches[0] : e;
   if (isDragging) {
-    c.x = headerHeight + (e.pageX - start.x)
-    const dy = e.pageY - start.y
-    const dampen = dy > 0 ? 1.5 : 4
-    c.y = headerHeight + dy / dampen
+    c.x = headerHeight + (event.pageX - start.x);
+    const dy = event.pageY - start.y;
+    const dampen = dy > 0 ? 1.5 : 4;
+    c.y = headerHeight + dy / dampen;
   }
 }
 
 function stopDrag() {
   if (isDragging) {
-    isDragging = false
+    isDragging = false;
     dynamics.animate(
       c,
       { x: headerHeight, y: headerHeight },
       { type: dynamics.spring, duration: 700, friction: 280 }
-    )
+    );
   }
 }
 </script>

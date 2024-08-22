@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "dynamics": "^1.0.0",
+    "dynamics.js": "^1.1.5",
     "element-plus": "^2.3.9",
     "gsap": "^3.12.2",
     "lodash-es": "^4.17.21",
