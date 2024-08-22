@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-
+import { defineAsyncComponent } from "vue";
 import Home from "../components/HelloWorld.vue";
 import animationA from "@/components/animationA.vue";
 // import A from "../components/animationA.vue";
@@ -28,7 +28,11 @@ const routes = [
   // { path: "/i", component: I },
   // { path: "/watch", component: WatchPage },
   // { path: "/watchEffect", component: WatchEffectPage },
-  { path: "/directives", component: directivesPage },
+  {
+    path: "/directives",
+    component: () => import("../views/directives/index.vue"),
+  },
+  { path: "/vSlots", component: () => import("../views/slots/index.vue") },
 ];
 
 const router = createRouter({
